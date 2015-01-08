@@ -23,17 +23,11 @@ Note: The widget assumes that the data context is that of a single document from
 
 You can also set the data context explicitly as follows:
 
-    {{> EditableList context=singlePostDocument collection="posts" field="author"}}
+    {{> editableList context=singlePostDocument collection="posts" field="author"}}
 
 where `singlePostDocument` can be a single post document already set in the current context, or provided by a template helper from the template that the widget was dropped into.
 
 (You can use `document`, `doc`, `object`, `obj`, `data` or `dataContext` instead of `context` - go with whichever you prefer.)
-
-#### Configuration
-
-You can change the global behaviour of the widget by setting certain properties of `EditableList`, which is the only variable that this package exposes.
-
-`EditableList.saveOnFocusout=false` will mean that the `focusout` event will not save text that is being edited (default is `EditableList.saveOnFocusout=true`)
 
 #### Options
 
@@ -65,6 +59,10 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `trustHTML=true` will make a particular widget instance rendered its text as HTML (default is `false`, which can be changed via `EditableList.trustHTML`)
 
+#### Configuration
+
+You can change the behaviour of the widget by setting certain properties of `EditableText`, which is a variable exposed by `babrahams:editable-text` which this package builds upon.
+
 #### Transactions
 
 There is built-in support for the `babrahams:transactions` package, if you want everything to be undo/redo-able. To enable this:
@@ -73,28 +71,28 @@ There is built-in support for the `babrahams:transactions` package, if you want 
 
 and in your app (in some config file on both client and server), add:
 
-	EditableList.useTransactions = true;
+	EditableText.useTransactions = true;
 
-Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set via `EditableList.useTransactions`, but this will only work if you also set `EditableList.clientControlsTransactions=true` (by default it is `false`). If you set the `EditableList.useTransactions` value on the server, without changing `EditableList.clientControlsTransactions`, it doesn't matter what you set on the client (or pass from the client), you will always get the behaviour as set on the server.
+Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set via `EditableText.useTransactions`, but this will only work if you also set `EditableText.clientControlsTransactions=true` (by default it is `false`). If you set the `EditableText.useTransactions` value on the server, without changing `EditableText.clientControlsTransactions`, it doesn't matter what you set on the client (or pass from the client), you will always get the behaviour as set on the server.
 
 #### Security
 
-`EditableList.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableList.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
+`EditableText.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
 
-	EditableList.userCanEdit = function() {
+	EditableText.userCanEdit = function(doc,Collection) {
 	  return this.context.user_id === Meteor.userId();
 	}
 
-In this case, it is a good idea to make the `EditableList.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
+In this case, it is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
 
-Note: the default setting is `EditableList.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableList.userCanEdit` function in a file that is shared by both client and server.  Note that this function receives the widget data context as `this` and the collection object as the only parameter.
+Note: the default setting is `EditableText.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableText.userCanEdit` function in a file that is shared by both client and server.  Note that this function receives the widget data context as `this` and the document and collection as the parameters.
 
     // e.g. If `type` is the editable field, but you want to limit the number of objects in the collection with any given value of `type` to 10
-    EditableList.userCanEdit = function(Collection) {
+    EditableText.userCanEdit = function(doc,Collection) {
 	  var count = Collection.find({type:this.context.type}).count(); // `this.context` is a document from `Collection`
 	  return count < 10;
 	}
 
-Warning: if you set `EditableList.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableList.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
+Warning: if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableText.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
 
-Bigger warning: it doesn't really matter what you set `EditableList.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableList.useMethods=false` into the browser console and this package will start making client side changes whose persistence are entirely subject to your `allow` and `deny` rules.
+Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes whose persistence are entirely subject to your `allow` and `deny` rules.
