@@ -1,7 +1,7 @@
 Package.describe({
   name: 'babrahams:editable-list',
   summary: 'Editable list widget for Meteor',
-  version: '0.1.0',
+  version: '0.1.1',
   git: 'https://github.com/jackadams/meteor-editable-list.git'
 });
 
@@ -11,7 +11,7 @@ Package.onUse(function(api) {
   
   api.use('babrahams:editable-text@0.6.5', ['client','server']);
   api.use('jquery', 'client');
-  api.use('mizzao:jquery-ui', 'client');
+  api.use('mizzao:jquery-ui@1.11.2', 'client');
   api.use('tracker', 'client');
   api.use('minimongo', 'client');
   api.use('templating', 'client');

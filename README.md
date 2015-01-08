@@ -1,5 +1,5 @@
 Editable Lists for Meteor
----------------------_---
+-------------------------
 
 This package provides a widget for rendering the array (of strings) fields of documents as editable lists.
 
