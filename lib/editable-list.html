@@ -1,0 +1,34 @@
+<template name="editableList">
+  {{> editable_list_widget context=context collection=collection field=field type=type horizontal=horizontal listClass=listClass listStyle=listStyle class=class style=style inputClass=inputClass inputStyle=inputStyle formClass=formClass formStyle=formStyle userCanEdit=userCanEdit useTransaction=useTransaction beforeInsert=beforeInsert afterInsert=afterInsert beforeUpdate=beforeUpdate afterUpdate=afterUpdate beforeRemove=beforeRemove afterRemove=afterRemove beforeReorder=beforeReorder afterReorder=afterReorder beforeInsertMultiple=beforeInsertMultiple afterInsertMultiple=afterInsertMultiple placeholder=placeholder saveOnFocusout=saveOnFocusout trustHTML=trustHTML useMethod=useMethod hideInput=hideInput allowDuplicates=allowDuplicates allowPasteMultiple=allowPasteMultiple numbered=numbered objectTypeText=objectTypeText}}
+</template>
+
+<template name="editable_list_widget">
+  <div class="editable-list-wrapper {{#if hideInput}}editable-list-reveal{{/if}} {{#if horizontal}}editable-list-horizontal{{/if}}">
+    <ul class="{{listClass}} editable-list" style="{{listStyle}}">
+      {{#each listItems}}
+        <li class="{{../class}}" style="{{../style}}">
+          {{#if ../numbered}}{{itemIndex}}.{{/if}}
+          {{#if editingItem ..}}
+            <input class="editable-list-input {{../editClass}}" type="text" value="{{this.text}}" style="{{../editStyle}}" />
+          {{else}}
+            <span class="{{#if canEditList ..}}editable-list-item{{/if}}" title="{{#if canEditList ..}}Click to edit{{/if}}">{{this.text}}</span>
+          {{/if}}
+        </li>
+      {{/each}}
+      {{#if horizontal}}
+        <li class="editable-list-form">{{> editable_list_form}}</li>
+      {{/if}}
+    </ul>
+    {{#unless horizontal}}
+      {{> editable_list_form}}
+    {{/unless}}
+  </div>
+</template>
+
+<template name="editable_list_form">
+  {{#if canEditList this}}
+    <form class="add-new-list-item {{formClass}}" style="{{formStyle}}">
+      <input type="text" placeholder="{{placeholder}}" class="{{inputClass}} {{#if hideInput}}editable-list-transparent{{/if}}" style="{{inputStyle}}" />
+    </form>
+  {{/if}} 
+</template>

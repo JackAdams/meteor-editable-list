@@ -1,0 +1,22 @@
+.editable-list-transparent {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.editable-list-reveal:hover .editable-list-transparent, .editable-list-transparent:focus {
+  opacity: 1;	
+}
+
+.editable-list-horizontal, .editable-list-horizontal ul, .editable-list-horizontal li {
+  display: inline-block;
+}
+
+.editable-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.editable-list li {
+  cursor: default;	
+}
