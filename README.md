@@ -94,6 +94,6 @@ __Note:__ the default setting is `EditableText.useMethods=true`, meaning updates
 	  return count < 10;
 	}
 
-Warning: if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. When `EditableText.useMethods=true` (the default setting) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
+__Warning:__ if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. When `EditableText.useMethods=true` (the default setting) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
 
-Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes that are persisted or not entirely on the basis of your `allow` and `deny` rules.
+__Bigger warning:__ it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes that are persisted or not entirely on the basis of your `allow` and `deny` rules.
