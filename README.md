@@ -57,7 +57,7 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `saveOnFocusout=false` will prevent a particular widget instance from saving the text being edited on a `focusout` event (the default is to save the text, which can be changed via `EditableList.saveOnFocusout`)
 
-`trustHTML=true` will make a particular widget instance rendered its text as HTML (default is `false`, which can be changed via `EditableList.trustHTML`)
+`trustHTML=true` will make a particular widget instance render its text as HTML (default is `false`, which can be changed via `EditableList.trustHTML`)
 
 #### Configuration
 
@@ -77,22 +77,23 @@ Or if you only want transactions on particular instances of the widget, pass `us
 
 #### Security
 
-`EditableText.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections. To control whether certain users can edit text on certain documents/fields, you can overwrite the function `EditableText.userCanEdit` (which has `this` containing all the data given to the widget, including `context` which is the document itself).  e.g. (to only allow users to edit their own documents):
+To control whether certain users can edit text on certain documents/fields, you can (and _should_) overwrite the function `EditableText.userCanEdit` (which has the data used to initialize the widget as `this` and the document and collection as parameters).  e.g. (to only allow users to edit their own documents):
 
 	EditableText.userCanEdit = function(doc,Collection) {
-	  return this.context.user_id === Meteor.userId();
+	  return doc.user_id === Meteor.userId();
 	}
 
-In this case, it is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
+Setting `EditableText.useMethods=false` will mean that all changes to documents are made on the client, so they are subject to the allow and deny rules you've defined for your collections.  In this case, it is a good idea to make the `EditableText.userCanEdit` function and your allow and deny functions share the same logic to the greatest degree possible.
 
-Note: the default setting is `EditableText.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableText.userCanEdit` function in a file that is shared by both client and server.  Note that this function receives the widget data context as `this` and the document and collection as the parameters.
+__Note:__ the default setting is `EditableText.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableText.userCanEdit` function in a file that is shared by both client and server.  Note again that this function receives the widget data context as `this` and the document and collection as the parameters.
 
-    // e.g. If `type` is the editable field, but you want to limit the number of objects in the collection with any given value of `type` to 10
+    // e.g. If `type` is the editable field, but you want to limit the
+	// number of objects in the collection with any given value of `type` to 10
     EditableText.userCanEdit = function(doc,Collection) {
-	  var count = Collection.find({type:this.context.type}).count(); // `this.context` is a document from `Collection`
+	  var count = Collection.find({type:doc.type}).count();
 	  return count < 10;
 	}
 
-Warning: if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. By default (i.e. when `EditableText.useMethods=true`) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
+Warning: if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. When `EditableText.useMethods=true` (the default setting) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
 
-Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes whose persistence are entirely subject to your `allow` and `deny` rules.
+Bigger warning: it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes that are persisted or not entirely on the basis of your `allow` and `deny` rules.
