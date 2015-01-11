@@ -1,7 +1,7 @@
 Package.describe({
   name: 'babrahams:editable-list',
   summary: 'Editable list widget for Meteor',
-  version: '0.1.3',
+  version: '0.1.4',
   git: 'https://github.com/jackadams/meteor-editable-list.git'
 });
 
@@ -9,7 +9,8 @@ Package.onUse(function(api) {
 	
   api.versionsFrom('1.0');
   
-  api.use('babrahams:editable-text@0.6.6', ['client','server']);
+  api.use('babrahams:editable-text@0.6.7', ['client','server']);
+  api.imply('babrahams:editable-text');
   api.use('jquery', 'client');
   api.use('mizzao:jquery-ui@1.11.2', 'client');
   api.use('tracker', 'client');
@@ -17,7 +18,7 @@ Package.onUse(function(api) {
   api.use('templating', 'client');
   api.use('blaze', 'client');
   api.use('spacebars', 'client');
-  api.use('dburles:mongo-collection-instances@0.2.5', ['client','server']);
+  api.use('dburles:mongo-collection-instances@0.2.6', ['client','server']);
   api.use('underscore', ['client','server']);
   api.use('mongo', ['client','server']);
   api.use('reactive-var', 'client');
