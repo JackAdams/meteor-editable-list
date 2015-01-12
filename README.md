@@ -87,13 +87,6 @@ Setting `EditableText.useMethods=false` will mean that all changes to documents 
 
 __Note:__ the default setting is `EditableText.useMethods=true`, meaning updates are processed server side and bypass your allow and deny rules. If you're happy with this (and you should be), then all you need to do for consistency between client and server permission checks is overwrite the `EditableText.userCanEdit` function in a file that is shared by both client and server.  Note again that this function receives the widget data context as `this` and the document and collection as the parameters.
 
-    // e.g. If `type` is the editable field, but you want to limit the
-	// number of objects in the collection with any given value of `type` to 10
-    EditableText.userCanEdit = function(doc,Collection) {
-	  var count = Collection.find({type:doc.type}).count();
-	  return count < 10;
-	}
-
 __Warning:__ if you set `EditableText.useMethods=false`, your data updates are being done on the client and you don't get html sanitization by default -- you'll have to sort this out or yourself via collection hooks or something. When `EditableText.useMethods=true` (the default setting) all data going into the database is passed through [htmlSantizer](https://github.com/punkave/sanitize-html).
 
 __Bigger warning:__ it doesn't really matter what you set `EditableText.useMethods` to -- you still need to lock down your collections using appropriate `allow` and `deny` rules. A malicious user can just type `EditableText.useMethods=false` into the browser console and this package will start making client side changes that are persisted or not entirely on the basis of your `allow` and `deny` rules.
