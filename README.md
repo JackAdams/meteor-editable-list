@@ -65,6 +65,8 @@ Use `editStyle` or `editClass` to style the `input` element used to edit a list 
 
 `allowPasteMultiple=true` will mean that `\n` separated items being pasted into the input box will automatically become separate items in the list
 
+`allowDuplicates=true` lets that user add items with identical text to the list (default is to not allow duplicates - i.e. use mongo's `$addToSet` rather than `$push`)
+
 #### Configuration
 
 You can change the behaviour of the widget by setting certain properties of `EditableText`, which is a variable exposed by `babrahams:editable-text` which this package builds upon.
