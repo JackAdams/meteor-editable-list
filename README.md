@@ -33,13 +33,17 @@ where `singlePostDocument` can be a single post document already set in the curr
 
 There are a number of parameters you can pass to the widget that affect its behaviour:
 
-`class="text-class"` will change the class attribute of the `li` element wrapping the text of a list item that can be edited
+`class="text-class"` will change the class attribute of the `span` element (inside the `li` element) that wraps the text of a list item
 
-`style=dynamicStyle` can be used if you need to have more dynamic control over the style of the editable list elements (use a template helper to give the `dynamicStyle`) e.g.
+`style=dynamicStyle` can be used if you need to have more dynamic control over the style of the `span` elements wrapping editable list text (use a template helper to give the `dynamicStyle`) e.g.
 	
 	dynamicStyle : function() {
 	  return 'color:' + Session.get('currentColor') + ';';
 	} 
+
+To set a class/style on the `li` element of list items, use something like `liClass="my-list-item-class"` or `liStyle="margin: 5px 5px 0 0;"`. This is particularly useful for putting a margin on horizontal list items. (Don't set padding with these if you have a horizontal list -- it messes with the drag and drop. Set padding using `class=...` or `style=...`.)
+
+Use `editStyle` or `editClass` to style the `input` element used to edit a list item.
 
 `inputClass="input-class"` will change the class attribute of the `input` element once the text is being edited
 
@@ -59,6 +63,8 @@ There are a number of parameters you can pass to the widget that affect its beha
 
 `trustHTML=true` will make a particular widget instance render its text as HTML (default is `false`, which can be changed via `EditableList.trustHTML`)
 
+`allowPasteMultiple=true` will mean that `\n` separated items being pasted into the input box will automatically become separate items in the list
+
 #### Configuration
 
 You can change the behaviour of the widget by setting certain properties of `EditableText`, which is a variable exposed by `babrahams:editable-text` which this package builds upon.
@@ -74,6 +80,8 @@ and in your app (in some config file on both client and server), add:
 	EditableText.useTransactions = true;
 
 Or if you only want transactions on particular instances of the widget, pass `useTransaction=true` or `useTransaction=false` to override the default that was set via `EditableText.useTransactions`, but this will only work if you also set `EditableText.clientControlsTransactions=true` (by default it is `false`). If you set the `EditableText.useTransactions` value on the server, without changing `EditableText.clientControlsTransactions`, it doesn't matter what you set on the client (or pass from the client), you will always get the behaviour as set on the server.
+
+__Note:__ you can set `objectTypeText="tag"` to make the transaction description say "added tag" instead of "added list item". (Replace "tag" with the name of whatever type of item is in the list.)
 
 #### Security
 
