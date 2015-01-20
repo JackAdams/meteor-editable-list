@@ -7,6 +7,8 @@ Example app: [http://editable-text-demo.meteor.com](http://editable-text-demo.me
 
 Example app repo: [https://github.com/JackAdams/editable-text-demo](https://github.com/JackAdams/editable-text-demo)
 
+Minimal example app: [Meteorpad](http://meteorpad.com/pad/yM49AHwC3yYrYCEqs/editable-list)
+
 #### Quick Start
 
 	meteor add babrahams:editable-list
