@@ -4,7 +4,7 @@
 }
 
 .editable-list-reveal:hover .editable-list-transparent, .editable-list-transparent:focus {
-  opacity: 1;	
+  opacity: 1;    
 }
 
 .editable-list-horizontal, .editable-list-horizontal ul, .editable-list-horizontal li {
@@ -18,5 +18,5 @@
 }
 
 .editable-list li {
-  cursor: default;	
+  cursor: default;    
 }

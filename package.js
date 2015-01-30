@@ -6,7 +6,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-	
+    
   api.versionsFrom('1.0');
   
   api.use('babrahams:editable-text@0.7.6', ['client','server']);
@@ -36,7 +36,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-	
+    
   api.use('tinytest');
   api.use('babrahams:editable-list');
   api.addFiles('lib/editable-list-tests.js');
