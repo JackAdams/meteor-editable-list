@@ -1,5 +1,5 @@
 <template name="editableList">
-  {{> editable_list_widget context=context collection=collection field=field type=type horizontal=horizontal listClass=listClass listStyle=listStyle class=class style=style inputClass=inputClass inputStyle=inputStyle formClass=formClass formStyle=formStyle editClass=editClass editStyle=editStyle userCanEdit=userCanEdit useTransaction=useTransaction beforeInsert=beforeInsert afterInsert=afterInsert beforeUpdate=beforeUpdate afterUpdate=afterUpdate beforeRemove=beforeRemove afterRemove=afterRemove beforeReorder=beforeReorder afterReorder=afterReorder beforeInsertMultiple=beforeInsertMultiple afterInsertMultiple=afterInsertMultiple placeholder=placeholder trustHTML=trustHTML useMethod=useMethod hideInput=hideInput allowDuplicates=allowDuplicates allowPasteMultiple=allowPasteMultiple numbered=numbered objectTypeText=objectTypeText liStyle=liStyle liClass=liClass}}
+  {{> editable_list_widget context=context collection=collection field=field type=type horizontal=horizontal listClass=listClass listStyle=listStyle class=class style=style inputClass=inputClass inputStyle=inputStyle formClass=formClass formStyle=formStyle editClass=editClass editStyle=editStyle userCanEdit=userCanEdit useTransaction=useTransaction beforeInsert=beforeInsert afterInsert=afterInsert beforeUpdate=beforeUpdate afterUpdate=afterUpdate beforeRemove=beforeRemove afterRemove=afterRemove beforeReorder=beforeReorder afterReorder=afterReorder beforeInsertMultiple=beforeInsertMultiple afterInsertMultiple=afterInsertMultiple placeholder=placeholder trustHTML=trustHTML useMethod=useMethod hideInput=hideInput allowDuplicates=allowDuplicates allowPasteMultiple=allowPasteMultiple numbered=numbered objectTypeText=objectTypeText liStyle=liStyle liClass=liClass optionalTemplate=optionalTemplate}}
 </template>
 
 <template name="editable_list_widget">
@@ -13,6 +13,7 @@
               <input class="editable-list-input {{../editClass}}" type="text" value="{{this.text}}" style="{{../editStyle}}" />
             {{else}}
               <span class="{{#if canEditList ..}}editable-list-item{{/if}}" title="{{#if canEditList ..}}Click to edit{{/if}}">{{this.text}}</span>
+              {{#if ../optionalTemplate}}{{#with context=../context template=../optionalTemplate item=this}}{{> optionalTemplateHelper}}{{/with}}{{/if}}
             {{/if}}
           </span>
         </li>
