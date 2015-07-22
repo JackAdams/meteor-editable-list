@@ -18,7 +18,7 @@ Package.onUse(function(api) {
   api.use('templating', 'client');
   api.use('blaze', 'client');
   api.use('spacebars', 'client');
-  api.use('dburles:mongo-collection-instances@0.3.3', ['client','server']);
+  api.use('dburles:mongo-collection-instances@0.3.4', ['client','server']);
   api.use('underscore', ['client','server']);
   api.use('mongo', ['client','server']);
   api.use('reactive-var', 'client');
