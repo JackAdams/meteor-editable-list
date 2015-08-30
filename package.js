@@ -1,7 +1,7 @@
 Package.describe({
   name: 'babrahams:editable-list',
   summary: 'Editable list widget for Meteor',
-  version: '0.2.21',
+  version: '0.4.0',
   git: 'https://github.com/jackadams/meteor-editable-list.git'
 });
 
@@ -9,20 +9,21 @@ Package.onUse(function(api) {
     
   api.versionsFrom('1.0');
   
-  api.use('babrahams:editable-text@0.7.26', ['client','server']);
+  api.use('babrahams:editable-text@0.8.0', ['client','server']);
   api.imply('babrahams:editable-text');
   api.use('jquery', 'client');
-  api.use('mizzao:jquery-ui@1.11.2', 'client');
+  // api.use('mizzao:jquery-ui@1.11.2', 'client'); // Removed in 0.3.0 to give devs flexibility about which version of jqueryui to use, or to leave it out completely
   api.use('tracker', 'client');
   api.use('minimongo', 'client');
   api.use('templating', 'client');
   api.use('blaze', 'client');
   api.use('spacebars', 'client');
-  api.use('dburles:mongo-collection-instances@0.3.3', ['client','server']);
+  api.use('dburles:mongo-collection-instances@0.3.4', ['client','server']);
   api.use('underscore', ['client','server']);
   api.use('mongo', ['client','server']);
   api.use('reactive-var', 'client');
-  api.use('djedi:sanitize-html@1.6.1', 'server');
+  api.use('djedi:sanitize-html@1.9.0', 'server');
+  api.imply('djedi:sanitize-html');
   
   api.addFiles('lib/editable-list-common.js', ['client','server']);
   api.addFiles('lib/editable-list.css','client');
