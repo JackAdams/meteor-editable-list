@@ -1,7 +1,7 @@
 Package.describe({
   name: 'babrahams:editable-list',
   summary: 'Editable list widget for Meteor',
-  version: '0.4.6',
+  version: '0.4.7',
   git: 'https://github.com/jackadams/meteor-editable-list.git'
 });
 
@@ -9,7 +9,7 @@ Package.onUse(function(api) {
     
   api.versionsFrom('1.0');
   
-  api.use('babrahams:editable-text@0.8.6', ['client','server']);
+  api.use('babrahams:editable-text@0.8.7', ['client','server']);
   api.imply('babrahams:editable-text');
   api.use('jquery', 'client');
   // api.use('mizzao:jquery-ui@1.11.2', 'client'); // Removed in 0.3.0 to give devs flexibility about which version of jqueryui to use, or to leave it out completely
@@ -22,7 +22,7 @@ Package.onUse(function(api) {
   api.use('underscore', ['client','server']);
   api.use('mongo', ['client','server']);
   api.use('reactive-var', 'client');
-  api.use('djedi:sanitize-html@1.10.1', 'server');
+  api.use('djedi:sanitize-html@1.11.2', 'server');
   api.imply('djedi:sanitize-html');
   
   api.addFiles('lib/editable-list-common.js', ['client','server']);
