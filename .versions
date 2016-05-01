@@ -1,8 +1,8 @@
 allow-deny@1.0.4
 babel-compiler@6.6.4
 babel-runtime@0.1.8
-babrahams:editable-list@0.4.12
-babrahams:editable-text@0.8.12
+babrahams:editable-list@0.4.13
+babrahams:editable-text@0.8.13
 base64@1.0.8
 binary-heap@1.0.8
 blaze@2.1.7
@@ -30,7 +30,7 @@ htmljs@1.0.9
 id-map@1.0.7
 jquery@1.11.8
 lai:collection-extensions@0.2.1_1
-local-test:babrahams:editable-list@0.4.12
+local-test:babrahams:editable-list@0.4.13
 logging@1.0.12
 meteor@1.1.14
 minifier-js@1.1.11
