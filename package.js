@@ -1,7 +1,7 @@
 Package.describe({
   name: 'babrahams:editable-list',
   summary: 'Editable list widget for Meteor',
-  version: '0.4.25',
+  version: '0.4.26',
   git: 'https://github.com/jackadams/meteor-editable-list.git'
 });
 
