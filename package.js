@@ -9,7 +9,7 @@ Package.onUse(function(api) {
     
   api.versionsFrom('1.0');
   
-  api.use('babrahams:editable-text@0.9.8', ['client','server']);
+  api.use('babrahams:editable-text@0.9.9', ['client','server']);
   api.imply('babrahams:editable-text');
   api.use('jquery', 'client');
   // api.use('mizzao:jquery-ui@1.11.2', 'client'); // Removed in 0.3.0 to give devs flexibility about which version of jqueryui to use, or to leave it out completely
