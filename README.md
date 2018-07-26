@@ -69,6 +69,8 @@ Use `editStyle` or `editClass` to style the `input` element used to edit a list 
 
 `allowDuplicates=true` lets that user add items with identical text to the list (default is to not allow duplicates - i.e. use mongo's `$addToSet` rather than `$push`)
 
+`key="field-name"` makes the widget assume that the `field` contains an array of objects rather than an array of strings; `field-name` is the field in the object whose (string) value gets edited; whole objects are removed from and/or added to the array by this widget, so be careful with this!
+
 #### Configuration
 
 You can change the behaviour of the widget by setting certain properties of `EditableText`, which is a variable exposed by `babrahams:editable-text` which this package builds upon.
