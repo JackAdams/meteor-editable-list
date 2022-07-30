@@ -6,8 +6,8 @@
   <div class="editable-list-wrapper {{#if hideInput}}editable-list-reveal{{/if}} {{#if horizontal}}editable-list-horizontal{{/if}}">
     <ul class="{{listClass}} editable-list" style="{{listStyle}}">
       {{#each listItems}}
-        <li class="{{../liClass}}" style="{{../liStyle}}">
-          <span class="{{../class}}" style="{{../style}}">
+        <li class="{{getTagClass ../liClass}}" style="{{getTagClass ../liStyle}}">
+          <span class="{{getTagClass ../class}}" style="{{getTagClass ../style}}">
             {{#if ../numbered}}{{itemIndex}}.{{/if}}
             {{#if editingItem ..}}
               <input class="editable-list-input {{../editClass}}" type="text" value="{{this.text}}" style="{{../editStyle}}" />
