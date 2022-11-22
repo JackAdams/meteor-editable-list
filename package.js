@@ -1,7 +1,7 @@
 Package.describe({
   name: 'babrahams:editable-list',
   summary: 'Editable list widget for Meteor',
-  version: '0.6.11',
+  version: '0.6.12',
   git: 'https://github.com/jackadams/meteor-editable-list.git'
 });
 
@@ -9,7 +9,7 @@ Package.onUse(function (api) {
     
   api.versionsFrom(['1.8.2', '2.3']);
   
-  api.use('babrahams:editable-text@0.9.17', ['client','server']);
+  api.use('babrahams:editable-text@0.9.18', ['client','server']);
   api.imply('babrahams:editable-text');
   api.use('jquery@1.11.11', 'client');
   // api.use('mizzao:jquery-ui@1.11.2', 'client'); // Removed in 0.3.0 to give devs flexibility about which version of jqueryui to use, or to leave it out completely
